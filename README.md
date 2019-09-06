@@ -11,7 +11,7 @@
   experimental and is not ready for production environments at this time.  Pi4J Version 2.0 reserves the 
   right to change any APIs without notice until this version is finally released.
   
-  **NOTE:* It is important to note that the pin numbering scheme for Pi4J Version 2.0 has changed.
+  **NOTE:** It is important to note that the pin numbering scheme for Pi4J Version 2.0 has changed.
   Pi4J now adopts the BCM pin numbering scheme as the default numbering scheme and no longer uses
   the WiringPi pin numbering scheme.  
 

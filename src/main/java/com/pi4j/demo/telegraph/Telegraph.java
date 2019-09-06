@@ -31,8 +31,8 @@ import com.pi4j.io.binding.OnOffBinding;
 import com.pi4j.io.gpio.digital.*;
 import com.pi4j.io.group.OnOffGroup;
 import com.pi4j.io.pwm.Pwm;
-import com.pi4j.io.pwm.PwmProvider;
 import com.pi4j.io.pwm.PwmType;
+import com.pi4j.plugin.pigpio.provider.gpio.digital.PiGpioDigitalOutputProvider;
 
 /**
  * <p>Main class.</p>
@@ -65,18 +65,14 @@ public class Telegraph {
         // Initialize Pi4J with an auto context
         var pi4j = Pi4J.newAutoContext();
 
-        // get the I/O providers we want to use from the Pi4J context
-        DigitalOutputProvider dout = pi4j.provider("pigpio-digital-output");
-        DigitalInputProvider din = pi4j.provider("pigpio-digital-input");
-        PwmProvider pwm = pi4j.provider("pigpio-pwm");
-
         // create PWM config
         var pwmConfig = Pwm.newConfigBuilder()
                 .pwmType(PwmType.HARDWARE)
                 .dutyCycle(50)  // 50%
                 .frequency(800) // 800Hz
                 .shutdown(0)
-                .initial(0);
+                .initial(0)
+                .provider("pigpio-pwm");
 
         // create a DIN config for Telegraph Key
         var keyConfig = DigitalInput.newConfigBuilder()
@@ -84,7 +80,8 @@ public class Telegraph {
                 .name("Telegraph Key")
                 .address(TELEGRAPH_KEY_PIN)
                 .pull(PullResistance.PULL_DOWN)
-                .debounce(3000L);
+                .debounce(3000L)
+                .provider("pigpio-digital-input");
 
         // create a digital input config Telegraph Sounder
         var sounderConfig = DigitalOutput.newConfigBuilder()
@@ -92,7 +89,8 @@ public class Telegraph {
                 .name("Telegraph Sounder")
                 .address(TELEGRAPH_SOUNDER_PIN)
                 .shutdown(DigitalState.LOW)
-                .initial(DigitalState.LOW);
+                .initial(DigitalState.LOW)
+                .provider("pigpio-digital-output");
 
 
         // create a DIN config Telegraph Sounder
@@ -101,20 +99,22 @@ public class Telegraph {
                 .name("Telegraph LED Flasher")
                 .address(LED_PIN)
                 .shutdown(DigitalState.LOW)
-                .initial(DigitalState.LOW);
+                .initial(DigitalState.LOW)
+                .provider(PiGpioDigitalOutputProvider.class);
 
         // create two hardware PWM instances (LEFT and RIGHT audio channels)
-        var left  = pwm.create(pwmConfig.address(PWM_PIN_LEFT).id("left-audio-channel").build());
-        var right = pwm.create(pwmConfig.address(PWM_PIN_RIGHT).id("right-audio-channel").build());
+        var left  = pi4j.create(pwmConfig.address(PWM_PIN_LEFT).id("left-audio-channel"));
+        var right = pi4j.create(pwmConfig.address(PWM_PIN_RIGHT).id("right-audio-channel"));
 
         // create a digital input pin instance for the Telegraph Key
-        var key = din.create(keyConfig);
+        var key = pi4j.create(keyConfig);
 
         // create a digital input pin instance for the Telegraph Sounder
-        var sounder = dout.create(sounderConfig);
+        var sounder = pi4j.create(sounderConfig);
 
         // create a digital output pin instance for the LED
-        var led = dout.create(ledConfig);
+        //var led = dout.create(ledConfig);
+        var led = pi4j.create(ledConfig);
 
         // create a group of IO instances that can all be controlled together
         OnOffGroup signal = OnOffGroup.newInstance(sounder, led, left, right);
