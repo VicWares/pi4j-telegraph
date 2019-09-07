@@ -59,8 +59,21 @@
     </dependencies>
 
     <build>
-        <plugins>
+        <!-- PROJECT RESOURCES -->
+        <resources>
+            <resource>
+                <directory>${basedir}</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>LICENSE.txt</include>
+                    <include>NOTICE.txt</include>
+                    <include>README.md</include>
+                </includes>
+            </resource>
+        </resources>
 
+        <!-- PROJECT BUILD PLUGINS -->
+        <plugins>
             <!-- JAVA COMPILER -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
