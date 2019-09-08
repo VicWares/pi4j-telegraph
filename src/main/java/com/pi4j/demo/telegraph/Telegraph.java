@@ -35,7 +35,9 @@ import com.pi4j.io.pwm.PwmType;
 import com.pi4j.plugin.pigpio.provider.gpio.digital.PiGpioDigitalOutputProvider;
 
 /**
- * <p>Main class.</p>
+ * <h2>Telegraph Sample</h2>
+ * <p>This example uses standard and straight-forward/plain-old Java code to utilize Pi4J.</p>
+ * <p>This project is available on <a href="https://github.com/Pi4J/pi4j-demo-telegraph">GitHub</a></p>
  *
  * @author Robert Savage (<a href="http://www.savagehomeautomation.com">http://www.savagehomeautomation.com</a>)
  * @version $Id: $Id
@@ -66,7 +68,7 @@ public class Telegraph {
         var pi4j = Pi4J.newAutoContext();
 
         // create PWM config
-        var pwmConfig = Pwm.newConfigBuilder()
+        var pwmConfig = Pwm.newConfigBuilder(pi4j)
                 .pwmType(PwmType.HARDWARE)
                 .dutyCycle(50)  // 50%
                 .frequency(800) // 800Hz
@@ -75,7 +77,7 @@ public class Telegraph {
                 .provider("pigpio-pwm");
 
         // create a DIN config for Telegraph Key
-        var keyConfig = DigitalInput.newConfigBuilder()
+        var keyConfig = DigitalInput.newConfigBuilder(pi4j)
                 .id("key")
                 .name("Telegraph Key")
                 .address(TELEGRAPH_KEY_PIN)
@@ -84,7 +86,7 @@ public class Telegraph {
                 .provider("pigpio-digital-input");
 
         // create a digital input config Telegraph Sounder
-        var sounderConfig = DigitalOutput.newConfigBuilder()
+        var sounderConfig = DigitalOutput.newConfigBuilder(pi4j)
                 .id("sounder")
                 .name("Telegraph Sounder")
                 .address(TELEGRAPH_SOUNDER_PIN)
@@ -94,7 +96,7 @@ public class Telegraph {
 
 
         // create a DIN config Telegraph Sounder
-        var ledConfig = DigitalOutput.newConfigBuilder()
+        var ledConfig = DigitalOutput.newConfigBuilder(pi4j)
                 .id("led")
                 .name("Telegraph LED Flasher")
                 .address(LED_PIN)
@@ -127,6 +129,8 @@ public class Telegraph {
 
         System.out.println("---------------------------------------------------");
         System.out.println(" [Pi4J V.2 DEMO] MORSE KEY");
+        System.out.println("---------------------------------------------------");
+        pi4j.registry().describe().print(System.out);
         System.out.println("---------------------------------------------------");
         System.out.println(" Press the telegraph key when ready.");
 

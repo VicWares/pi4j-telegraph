@@ -27,7 +27,6 @@ package com.pi4j.demo.telegraph;
  */
 
 import com.pi4j.Pi4J;
-import com.pi4j.io.IOType;
 import com.pi4j.io.binding.OnOffBinding;
 import com.pi4j.io.gpio.digital.DigitalChangeListener;
 import com.pi4j.io.gpio.digital.DigitalInput;
@@ -38,7 +37,11 @@ import com.pi4j.io.pwm.Pwm;
 import java.io.InputStream;
 
 /**
- * <p>Main class.</p>
+ * <h2>TelegraphUsingProperties Sample</h2>
+ * <p>This example also uses standard and straight-forward/plain-old Java code to utilize Pi4J;
+ *    however, it loads much of the I/O configuration from a properties file opposed to having
+ *    the configuration hard-coded in your source code.</p>
+ * <p>This project is available on <a href="https://github.com/Pi4J/pi4j-demo-telegraph">GitHub</a></p>
  *
  * @author Robert Savage (<a href="http://www.savagehomeautomation.com">http://www.savagehomeautomation.com</a>)
  * @version $Id: $Id
@@ -80,7 +83,6 @@ public class TelegraphUsingProperties {
         DigitalOutput sounder = pi4j.create("sounder");
 
         // create a digital output pin instance for the LED
-        //var led = dout.create(ledConfig);
         DigitalOutput led = pi4j.create("led");
 
         // create a group of IO instances that can all be controlled together
@@ -94,6 +96,8 @@ public class TelegraphUsingProperties {
 
         System.out.println("---------------------------------------------------");
         System.out.println(" [Pi4J V.2 DEMO] MORSE KEY");
+        System.out.println("---------------------------------------------------");
+        pi4j.registry().describe().print(System.out);
         System.out.println("---------------------------------------------------");
         System.out.println(" Press the telegraph key when ready.");
 

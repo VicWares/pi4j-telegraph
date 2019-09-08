@@ -38,7 +38,11 @@ import com.pi4j.io.pwm.PwmType;
 import java.util.concurrent.Callable;
 
 /**
- * <p>Main class.</p>
+ * <h2>TelegraphUsingDI Sample</h2>
+ * <p>This example utilizes the new Pi4J annotation framework to perform runtime dependency injection
+ * to wire up and configure the I/O interfaces with Pi4J.  This is a very declarative style/approach to using
+ * to using the Pi4J APIs.</p>
+ * <p>This project is available on <a href="https://github.com/Pi4J/pi4j-demo-telegraph">GitHub</a></p>
  *
  * @author Robert Savage (<a href="http://www.savagehomeautomation.com">http://www.savagehomeautomation.com</a>)
  * @version $Id: $Id
@@ -93,7 +97,7 @@ public class TelegraphUsingDI {
         @WithProvider("pigpio-digital-output")
         private DigitalOutput led;
 
-        @Register("left-channel-audio")
+        @Register("left-audio-channel")
         @Name("Telegraph Speaker (LEFT)")
         @Address(PWM_PIN_LEFT)
         @WithPwmType(PwmType.HARDWARE)
@@ -104,7 +108,7 @@ public class TelegraphUsingDI {
         @WithProvider("pigpio-pwm")
         private Pwm left;
 
-        @Register("right-channel-audio")
+        @Register("right-audio-channel")
         @Name("Telegraph Speaker (RIGHT)")
         @Address(PWM_PIN_RIGHT)
         @WithPwmType(PwmType.HARDWARE)
@@ -118,12 +122,12 @@ public class TelegraphUsingDI {
         @Register
         @AddMember("sounder")
         @AddMember("led")
-        @AddMember("left-channel-audio")
-        @AddMember("right-channel-audio")
+        @AddMember("left-audio-channel")
+        @AddMember("right-audio-channel")
         OnOffGroup signal;
 
         @Register
-        @AddMember({"sounder", "led", "left-channel-audio", "right-channel-audio"})
+        @AddMember({"sounder", "led", "left-audio-channel", "right-audio-channel"})
         @AddMember("led")
         OnOffBinding onOffBinding;
 
@@ -152,6 +156,8 @@ public class TelegraphUsingDI {
 
             System.out.println("---------------------------------------------------");
             System.out.println(" [Pi4J V.2 DEMO] MORSE KEY");
+            System.out.println("---------------------------------------------------");
+            pi4j.registry().describe().print(System.out);
             System.out.println("---------------------------------------------------");
             System.out.println(" Press the telegraph key when ready.");
 

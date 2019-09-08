@@ -59,8 +59,8 @@
 
   * **TelegraphUsingProperties** -- This example also uses standard and 
   straight-forward/plain-old Java code to utilize Pi4J; however, it loads
-  much of the I/O configuration from a properties file opposed to having it
-  all hard-coded in your source code.
+  much of the I/O configuration from a properties file opposed to having the
+  configuration hard-coded in your source code.
 
   This demonstration will use the following I/O capabilities of the Raspberry Pi:
   
