@@ -128,7 +128,7 @@ public class Telegraph {
         key.addListener((DigitalChangeListener) event -> System.out.println("TELEGRAPH DEMO :: " + event));
 
         System.out.println("---------------------------------------------------");
-        System.out.println(" [Pi4J V.2 DEMO] MORSE KEY");
+        System.out.println(" [Pi4J V.2 DEMO] TELEGRAPH (Using Plain Old Java)");
         System.out.println("---------------------------------------------------");
         pi4j.registry().describe().print(System.out);
         System.out.println("---------------------------------------------------");

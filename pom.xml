@@ -60,17 +60,17 @@
 
     <build>
         <!-- PROJECT RESOURCES -->
-        <resources>
-            <resource>
-                <directory>${basedir}</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>LICENSE.txt</include>
-                    <include>NOTICE.txt</include>
-                    <include>README.md</include>
-                </includes>
-            </resource>
-        </resources>
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>${basedir}</directory>-->
+                <!--<filtering>false</filtering>-->
+                <!--<includes>-->
+                    <!--<include>LICENSE.txt</include>-->
+                    <!--<include>NOTICE.txt</include>-->
+                    <!--<include>README.md</include>-->
+                <!--</includes>-->
+            <!--</resource>-->
+        <!--</resources>-->
 
         <!-- PROJECT BUILD PLUGINS -->
         <plugins>

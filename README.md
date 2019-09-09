@@ -44,23 +44,33 @@
 
 ## PROJECT OVERVIEW
 
-  This demonstration project provides three source files that all perform
-  the exact same functionality.  Each of the three source files demonstrate
+  This demonstration project provides the following source files that all perform
+  the exact same functionality.  Each of the source examples demonstrate
   different approaches/styles that you can use to utilize the Pi4J libraries
   to interact with the I/O capabilities of the Raspberry Pi.
 
   * **Telegraph** -- This example uses standard and straight-forward/plain-old 
   Java code to utilize Pi4J.
 
-  * **TelegraphUsingDI** -- This example utilizes the new Pi4J annotation 
-  framework to perform runtime dependency injection to wire up the I/O
-  interfaces to Pi4J.  This is a very declarative style/approach to using
-  the Pi4J APIs. 
+  * **TelegraphUsingAnnotatedDI** (Dependency Injection) -- This example utilizes the  
+  new Pi4J annotation framework to perform runtime dependency injection to wire up I/O
+  interfaces to Pi4J.  This is a very declarative style/approach to using the Pi4J
+  APIs.  The `@Register` annotation is used to create each IO instance along with
+  a series of additional annotations to configure the I/O instance. 
 
-  * **TelegraphUsingProperties** -- This example also uses standard and 
+  * **TelegraphUsingProperties** -- This example uses standard and 
   straight-forward/plain-old Java code to utilize Pi4J; however, it loads
   much of the I/O configuration from a properties file opposed to having the
   configuration hard-coded in your source code.
+
+  * **TelegraphUsingAutoInjection** -- This example uses an optional Pi4J feature to
+  automatically register and inject I/O instances in the Pi4J Registry from
+  declared I/O configurations defined in properties files.
+
+  * **TelegraphUsingAnnotatedAI** (Auto Injection) -- This example uses an optional 
+  Pi4J feature to automatically register and inject I/O instances in the Pi4J Registry
+  from declared I/O configurations defined in properties files.  This example also
+  injects the I/O instances into the program via `@Inject` annotations.
 
   This demonstration will use the following I/O capabilities of the Raspberry Pi:
   

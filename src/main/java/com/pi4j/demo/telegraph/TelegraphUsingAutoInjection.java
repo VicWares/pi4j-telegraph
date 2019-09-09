@@ -37,7 +37,7 @@ import com.pi4j.io.pwm.Pwm;
 import java.io.InputStream;
 
 /**
- * <h2>TelegraphUsingProperties Sample</h2>
+ * <h2>TelegraphUsingAutoInjection Sample</h2>
  * <p>This example also uses standard and straight-forward/plain-old Java code to utilize Pi4J;
  *    however, it loads much of the I/O configuration from a properties file opposed to having
  *    the configuration hard-coded in your source code.</p>
@@ -46,7 +46,7 @@ import java.io.InputStream;
  * @author Robert Savage (<a href="http://www.savagehomeautomation.com">http://www.savagehomeautomation.com</a>)
  * @version $Id: $Id
  */
-public class TelegraphUsingProperties {
+public class TelegraphUsingAutoInjection {
 
     /**
      * <p>main.</p>
@@ -59,31 +59,23 @@ public class TelegraphUsingProperties {
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
 
         // get properties files/stream from embedded resource file
-        InputStream propertiesStream = TelegraphUsingProperties.class.getClassLoader()
+        InputStream propertiesStream = TelegraphUsingAutoInjection.class.getClassLoader()
                 .getResourceAsStream("pi4j.properties");
 
         // Initialize Pi4J with an auto context and load properties into context
-        var pi4j = Pi4J.newContextBuilder().autoDetect().properties(propertiesStream).build();
+        var pi4j = Pi4J.newContextBuilder()
+                .autoDetect()
+                .autoInject()  // <--THIS WILL ATTEMPT TO AUTO REGISTER AND INJECT I/O
+                               //    INSTANCES FROM PROPERTIES INTO Pi4J CONTEXT/REGISTRY
+                .properties(propertiesStream)
+                .build();
 
-        // NOTE:  The following IO instances will be looked up in from the properties
-        //        loaded into the Pi4J context.  Each defined "key" includes a series
-        //        of property values each prefixed with the "key" identifier followed
-        //        by a property name in dot notation. i.e. "{key}.{property}".  The
-        //        IO instance will use these eky prefixed properties to auto-configure
-        //        the created IO instance.
-
-        // create two hardware PWM instances (LEFT and RIGHT audio channels)
-        Pwm left  = pi4j.create("left-audio-channel");
-        Pwm right = pi4j.create("right-audio-channel");
-
-        // create a digital input pin instance for the Telegraph Key
-        DigitalInput key = pi4j.create("key");
-
-        // create a digital input pin instance for the Telegraph Sounder
-        DigitalOutput sounder = pi4j.create("sounder");
-
-        // create a digital output pin instance for the LED
-        DigitalOutput led = pi4j.create("led");
+        // get the existing registered I/O instances from the Pi4J IO Registry
+        DigitalInput key      = pi4j.io("key");
+        DigitalOutput sounder = pi4j.io("sounder");
+        DigitalOutput led     = pi4j.io("led");
+        Pwm left              = pi4j.io("left-audio-channel");
+        Pwm right             = pi4j.io("right-audio-channel");
 
         // create a group of IO instances that can all be controlled together
         OnOffGroup signal = OnOffGroup.newInstance(sounder, led, left, right);
@@ -95,7 +87,7 @@ public class TelegraphUsingProperties {
         key.addListener((DigitalChangeListener) event -> System.out.println("TELEGRAPH DEMO :: " + event));
 
         System.out.println("---------------------------------------------------");
-        System.out.println(" [Pi4J V.2 DEMO] TELEGRAPH (Using Properties)");
+        System.out.println(" [Pi4J V.2 DEMO] TELEGRAPH (Using Auto Injection)");
         System.out.println("---------------------------------------------------");
         pi4j.registry().describe().print(System.out);
         System.out.println("---------------------------------------------------");
