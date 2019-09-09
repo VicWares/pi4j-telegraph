@@ -26,11 +26,13 @@
  */
 module pi4j.demo.telegraph {
 
-    // using these modules
+    // Pi4J MODULES
     requires pi4j.api;
-    requires slf4j.simple;
-    requires slf4j.api;
     requires pi4j.plugin.pigpio;
+
+    // SLF4J MODULES
+    requires org.slf4j;
+    requires org.slf4j.simple;
 
     // allow access to classes in the following namespaces for Pi4J annotation processing
     opens com.pi4j.demo.telegraph;
