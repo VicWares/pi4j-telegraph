@@ -27,6 +27,7 @@ package com.pi4j.demo.telegraph;
  */
 
 import com.pi4j.Pi4J;
+import com.pi4j.event.ShutdownListener;
 import com.pi4j.io.binding.OnOffBinding;
 import com.pi4j.io.gpio.digital.*;
 import com.pi4j.io.group.OnOffGroup;
@@ -125,7 +126,7 @@ public class Telegraph {
         key.bind(OnOffBinding.newInstance(signal));
 
         // add event listener for the Telegraph Key input changes
-        key.addListener((DigitalChangeListener) event -> System.out.println("TELEGRAPH DEMO :: " + event));
+        key.addListener((DigitalStateChangeListener) event -> System.out.println("TELEGRAPH DEMO :: " + event));
 
         System.out.println("---------------------------------------------------");
         System.out.println(" [Pi4J V.2 DEMO] TELEGRAPH (Using Plain Old Java)");
@@ -134,12 +135,15 @@ public class Telegraph {
         System.out.println("---------------------------------------------------");
         System.out.println(" Press the telegraph key when ready.");
 
-        // keep the program running
-        System.in.read();
+        // add a shutdown listener
+        pi4j.addListener((ShutdownListener) shutdownEvent -> {
+            System.out.println("---------------------------------------------------");
+            System.out.println("[Pi4J V.2 DEMO] SHUTTING DOWN");
+            System.out.println("---------------------------------------------------");
+        });
 
-        System.out.println("---------------------------------------------------");
-        System.out.println("[Pi4J V.2 DEMO] SHUTTING DOWN");
-        System.out.println("---------------------------------------------------");
+        // keep the program running until we see user input
+        System.in.read();
 
         // shutdown Pi4J context now
         pi4j.shutdown();

@@ -29,6 +29,8 @@ package com.pi4j.demo.telegraph;
 import com.pi4j.Pi4J;
 import com.pi4j.annotation.*;
 import com.pi4j.context.Context;
+import com.pi4j.event.InitializedEvent;
+import com.pi4j.event.ShutdownEvent;
 import com.pi4j.io.binding.OnOffBinding;
 import com.pi4j.io.gpio.digital.*;
 import com.pi4j.io.group.OnOffGroup;
@@ -143,31 +145,32 @@ public class TelegraphUsingAnnotatedDI {
         // setup a digital input event listener to listen for any value changes on the digital input
         // using a custom method with a single event parameter
         @OnEvent("key")
-        private void onDigitalInputChange(DigitalChangeEvent event){
+        private void onDigitalInputChange(DigitalStateChangeEvent event){
             System.out.println("TELEGRAPH DEMO :: " + event);
+        }
+
+        @OnEvent
+        private void onShutdown(ShutdownEvent event){
+            System.out.println("---------------------------------------------------");
+            System.out.println("[Pi4J V.2 DEMO] SHUTTING DOWN");
+            System.out.println("---------------------------------------------------");
+        }
+
+        @OnEvent
+        private void onInitialized(InitializedEvent event){
+            pi4j.registry().describe().print(System.out);
+            System.out.println("---------------------------------------------------");
+            System.out.println(" Press the telegraph key when ready.");
         }
 
         @Override
         public Void call() throws Exception {
-
-            // bind the input changes from the Telegraph Key to the output Signal group
-            //key.bind(OnOffBinding.newInstance(signal));
-            //key.bind(onOffBinding);
-
             System.out.println("---------------------------------------------------");
             System.out.println(" [Pi4J V.2 DEMO] TELEGRAPH (Using DI/Annotations)");
             System.out.println("---------------------------------------------------");
-            pi4j.registry().describe().print(System.out);
-            System.out.println("---------------------------------------------------");
-            System.out.println(" Press the telegraph key when ready.");
 
-            // keep the program running
+            // keep the program running until we see user input
             System.in.read();
-
-
-            System.out.println("---------------------------------------------------");
-            System.out.println("[Pi4J V.2 DEMO] SHUTTING DOWN");
-            System.out.println("---------------------------------------------------");
 
             // shutdown Pi4J context now
             pi4j.shutdown();
