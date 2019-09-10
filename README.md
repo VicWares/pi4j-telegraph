@@ -86,6 +86,43 @@
   wire up to a LEFT and RIGHT audio channel on an amplified speaker.  This creates 
   a tone to audible monitor the telegraph signals (morse code). 
 
+## RUNTIME DEPENDENCIES
+
+  This project used Pi4J V.2 which has the following runtime dependency requirements:
+  - [**SLF4J (API)**](https://www.slf4j.org/)
+  - [**SLF4J-SIMPLE**](https://www.slf4j.org/)
+  - [**PIGPIO Library**](http://abyz.me.uk/rpi/pigpio) (for the Raspberry Pi) - This 
+    dependency comes pre-installed on recent Raspbian images.  However, you can also 
+    download and install it yourself using the instructions found 
+    [here](http://abyz.me.uk/rpi/pigpio/download.html).  (*A minimum version of `71` 
+    is recommended at the time of this writing*)
+
+## BUILD DEPENDENCIES & INSTRUCTIONS
+
+  This project is build using [Apache Maven](https://maven.apache.org/) 3.6 
+  (or later) and Java 11 JDK (or later).  These prerequisites must be installed 
+  prior to building this project.  The following command can be used to download 
+  all project dependencies and compile the Java module.  You can build this 
+  project on you workstation or directly on a Raspberry Pi.  
+ 
+  ```text
+  mvn clean install
+  ```
+  Once the build is complete and was successful, you can find the compiled 
+  artifacts in the `target` folder.  Specifically all dependency modules (JARs)
+  and a simple `run.sh` bash script will be located in the `target/distribution` 
+  folder.  These are all the required files needed to distribute (copy) to your
+  Raspberry Pi to run this project.  
+  
+  Alternatively, you can use one of the following commands to launch this program 
+  from the folder where you copied all the distribution files on the Raspberry Pi:
+  
+  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.Telegraph`
+  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAnnotatedDI`
+  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingProperties`
+  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAutoInjection`
+  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAnnotatedAI`
+
 ## WIRING DIAGRAM
 
   This diagram is using a Raspberry Pi 3B Plus; however any supported Raspberry Pi 
@@ -100,7 +137,6 @@
   restricts current to the device. 
 
   ![wiring-diagram](assets/wiring-diagram.png)
-
 
   **NOTE:** It is important to note that the pin numbering scheme for Pi4J Version 2.0 has changed.
   Pi4J now adopts the BCM pin numbering scheme as the default numbering scheme and no longer uses
