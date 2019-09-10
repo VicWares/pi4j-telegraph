@@ -112,16 +112,18 @@
   artifacts in the `target` folder.  Specifically all dependency modules (JARs)
   and a simple `run.sh` bash script will be located in the `target/distribution` 
   folder.  These are all the required files needed to distribute (copy) to your
-  Raspberry Pi to run this project.  
-  
+  Raspberry Pi to run this project.  If you are using the native bindings running 
+  locally on the Raspberry Pi, then you make have to run the program using `sudo` 
+  to gain the necessary access permissions to the hardware I/O.  
+
   Alternatively, you can use one of the following commands to launch this program 
   from the folder where you copied all the distribution files on the Raspberry Pi:
   
-  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.Telegraph`
-  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAnnotatedDI`
-  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingProperties`
-  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAutoInjection`
-  - `java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAnnotatedAI`
+  - `sudo java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.Telegraph`
+  - `sudo java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAnnotatedDI`
+  - `sudo java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingProperties`
+  - `sudo java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAutoInjection`
+  - `sudo java --module-path . --module com.pi4j.demo.telegraph/com.pi4j.demo.telegraph.TelegraphUsingAnnotatedAI`
 
 ## WIRING DIAGRAM
 
