@@ -131,6 +131,7 @@
                                 <copy todir="${project.build.directory}/distribution" overwrite="true" flatten="true">
                                     <fileset dir="assets" includes="*.sh" ></fileset>
                                 </copy>
+                                <chmod dir="${project.build.directory}/distribution" perm="ugo+rx" includes="**/*.sh"/>
                             </target>
                         </configuration>
                         <goals>
@@ -154,9 +155,9 @@
                         <configuration>
                             <outputDirectory>${project.build.directory}/distribution</outputDirectory>
                             <includeScope>runtime</includeScope>
-                            <excludeTransitive>true</excludeTransitive>
+                            <excludeTransitive>false</excludeTransitive>
                             <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteSnapshots>true</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
                         </configuration>
                     </execution>
