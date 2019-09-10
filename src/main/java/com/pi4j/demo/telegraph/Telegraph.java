@@ -62,8 +62,8 @@ public class Telegraph {
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
 
         // instruct PIGPIO which remote Raspberry Pi to connect to
-        System.setProperty("pi4j.host", "rpizero-1");
-        System.setProperty("pi4j.pigpio.remote", "true");
+        //System.setProperty("pi4j.host", "127.0.0.1");
+        //System.setProperty("pi4j.pigpio.remote", "false");
 
         // Initialize Pi4J with an auto context
         var pi4j = Pi4J.newAutoContext();

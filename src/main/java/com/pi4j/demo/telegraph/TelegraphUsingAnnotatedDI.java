@@ -68,8 +68,8 @@ public class TelegraphUsingAnnotatedDI {
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
 
         // instruct PIGPIO which remote Raspberry Pi to connect to
-        System.setProperty("pi4j.host", "rpi3bp.savage.lan");
-        System.setProperty("pi4j.pigpio.remote", "true");
+        //System.setProperty("pi4j.host", "127.0.0.1");
+        //System.setProperty("pi4j.pigpio.remote", "false");
 
         // Pi4J cannot perform dependency injection on static classes
         // we will create a container instance to run our example
