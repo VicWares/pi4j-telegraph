@@ -51,11 +51,11 @@ import java.util.concurrent.Callable;
  */
 public class TelegraphUsingAnnotatedDI {
 
+    public static final int TELEGRAPH_KEY_PIN     = 04;  // DIGITAL INPUT PIN
     public static final int PWM_PIN_RIGHT         = 18;  // PWM CHANNEL 0 (RIGHT)
     public static final int PWM_PIN_LEFT          = 19;  // PWM CHANNEL 1 (LEFT)
-    public static final int TELEGRAPH_KEY_PIN     = 21;  // DIGITAL INPUT PIN
-    public static final int TELEGRAPH_SOUNDER_PIN = 20;  // DIGITAL OUTPUT PIN
-    public static final int LED_PIN               = 26;  // DIGITAL OUTPUT PIN
+    public static final int TELEGRAPH_SOUNDER_PIN = 23;  // DIGITAL OUTPUT PIN
+    public static final int LED_PIN               = 25;  // DIGITAL OUTPUT PIN
 
     /**
      * <p>main.</p>

@@ -45,11 +45,11 @@ import com.pi4j.plugin.pigpio.provider.gpio.digital.PiGpioDigitalOutputProvider;
  */
 public class Telegraph {
 
+    public static final int TELEGRAPH_KEY_PIN     = 04;  // DIGITAL INPUT PIN
     public static final int PWM_PIN_RIGHT         = 18;  // PWM CHANNEL 0 (RIGHT)
     public static final int PWM_PIN_LEFT          = 19;  // PWM CHANNEL 1 (LEFT)
-    public static final int TELEGRAPH_KEY_PIN     = 21;  // DIGITAL INPUT PIN
-    public static final int TELEGRAPH_SOUNDER_PIN = 20;  // DIGITAL OUTPUT PIN
-    public static final int LED_PIN               = 26;  // DIGITAL OUTPUT PIN
+    public static final int TELEGRAPH_SOUNDER_PIN = 23;  // DIGITAL OUTPUT PIN
+    public static final int LED_PIN               = 25;  // DIGITAL OUTPUT PIN
 
     /**
      * <p>main.</p>
@@ -62,7 +62,7 @@ public class Telegraph {
         System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "INFO");
 
         // instruct PIGPIO which remote Raspberry Pi to connect to
-        System.setProperty("pi4j.host", "rpi3bp.savage.lan");
+        System.setProperty("pi4j.host", "rpizero-1");
         System.setProperty("pi4j.pigpio.remote", "true");
 
         // Initialize Pi4J with an auto context
