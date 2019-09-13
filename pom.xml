@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+        <!-- DEPENDENCY VERSIONS -->
         <pi4j.version>2.0-SNAPSHOT</pi4j.version>
         <slf4j.version>2.0.0-alpha0</slf4j.version>
 
@@ -16,26 +17,30 @@
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <!-- BUILD PLUGIN VERSIONS -->
         <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+
+        <!-- FILE ENCODING -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <!-- DEPENDENCIES -->
     <dependencies>
-        <dependency>
-            <groupId>com.pi4j</groupId>
-            <artifactId>pi4j-api</artifactId>
-            <version>${pi4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
+
+        <!-- Include SLF4J Logging Implementation -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- include Pi4J API & Runtime (Core) -->
+        <dependency>
+            <groupId>com.pi4j</groupId>
+            <artifactId>pi4j-api</artifactId>
+            <version>${pi4j.version}</version>
         </dependency>
 
         <!-- include Pi4J Plugins (Platforms and I/O Providers) -->
@@ -49,26 +54,21 @@
             <artifactId>pi4j-plugin-pigpio</artifactId>
             <version>${pi4j.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.pi4j</groupId>
-            <artifactId>pi4j-plugin-raspberrypi</artifactId>
-            <version>${pi4j.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
         <!-- PROJECT RESOURCES -->
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>${basedir}</directory>-->
-                <!--<filtering>false</filtering>-->
-                <!--<includes>-->
-                    <!--<include>LICENSE.txt</include>-->
-                    <!--<include>NOTICE.txt</include>-->
-                    <!--<include>README.md</include>-->
-                <!--</includes>-->
-            <!--</resource>-->
-        <!--</resources>-->
+        <resources>
+            <resource>
+                <directory>${basedir}</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>LICENSE.txt</include>
+                    <include>NOTICE.txt</include>
+                    <include>README.md</include>
+                </includes>
+            </resource>
+        </resources>
 
         <!-- PROJECT BUILD PLUGINS -->
         <plugins>

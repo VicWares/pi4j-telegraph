@@ -33,7 +33,6 @@ import com.pi4j.io.gpio.digital.*;
 import com.pi4j.io.group.OnOffGroup;
 import com.pi4j.io.pwm.Pwm;
 import com.pi4j.io.pwm.PwmType;
-import com.pi4j.plugin.pigpio.provider.gpio.digital.PiGpioDigitalOutputProvider;
 
 /**
  * <h2>Telegraph Sample</h2>
@@ -103,7 +102,7 @@ public class Telegraph {
                 .address(LED_PIN)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
-                .provider(PiGpioDigitalOutputProvider.class);
+                .provider("pigpio-digital-output");
 
         // create two hardware PWM instances (LEFT and RIGHT audio channels)
         var left  = pi4j.create(pwmConfig.address(PWM_PIN_LEFT).id("left-audio-channel"));
