@@ -39,7 +39,7 @@
         <!-- include Pi4J API & Runtime (Core) -->
         <dependency>
             <groupId>com.pi4j</groupId>
-            <artifactId>pi4j-api</artifactId>
+            <artifactId>pi4j-core</artifactId>
             <version>${pi4j.version}</version>
         </dependency>
 
