@@ -6,7 +6,7 @@
 
     <groupId>com.pi4j</groupId>
     <artifactId>pi4j-example-telegraph</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>9.0.G-VERSION</version>
 
     <properties>
         <!-- DEPENDENCY VERSIONS -->
