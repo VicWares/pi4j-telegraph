@@ -8,7 +8,8 @@ package com.pi4j.demo.telegraph;
  * Transfer directory to Pi with: scp -r "${PWD}" pi@raspberrypi.local:
  * Clear directory with: rm -r "${PWD}"
  * Files in Pi are at: /Users/vicwintriss/git/pi4j-example-telegraph/target/distribution
- *
+ *!!!!!!Don't lose this...easy start for Maven app:
+ mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
  * **********************************************************************
  */
 import com.pi4j.Pi4J;
